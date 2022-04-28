@@ -1,0 +1,93 @@
+parameter (map %add_blog string string);
+storage   (pair (pair (list %category string) (list %content string)) (pair (list %dat string) (pair (list %heading string) (list %tim string))));
+code
+  {
+    UNPAIR;     # @parameter : @storage
+    SWAP;       # @storage : @parameter
+    # == add_blog ==
+    # self.data.heading.push(params['heading']) # @storage : @parameter
+    DUP;        # @storage : @storage : @parameter
+    GET 5;      # list string : @storage : @parameter
+    DUP 3;      # @parameter : list string : @storage : @parameter
+    PUSH string "heading"; # string : @parameter : list string : @storage : @parameter
+    GET;        # option string : list string : @storage : @parameter
+    IF_NONE
+      {
+        PUSH int 16; # int : list string : @storage : @parameter
+        FAILWITH;   # FAILED
+      }
+      {}; # @some : list string : @storage : @parameter
+    CONS;       # list string : @storage : @parameter
+    UPDATE 5;   # @storage : @parameter
+    # self.data.dat.push(params['dat']) # @storage : @parameter
+    DUP;        # @storage : @storage : @parameter
+    GET 3;      # list string : @storage : @parameter
+    DUP 3;      # @parameter : list string : @storage : @parameter
+    PUSH string "dat"; # string : @parameter : list string : @storage : @parameter
+    GET;        # option string : list string : @storage : @parameter
+    IF_NONE
+      {
+        PUSH int 17; # int : list string : @storage : @parameter
+        FAILWITH;   # FAILED
+      }
+      {}; # @some : list string : @storage : @parameter
+    CONS;       # list string : @storage : @parameter
+    UPDATE 3;   # @storage : @parameter
+    # self.data.tim.push(params['tim']) # @storage : @parameter
+    DUP;        # @storage : @storage : @parameter
+    GET 6;      # list string : @storage : @parameter
+    DUP 3;      # @parameter : list string : @storage : @parameter
+    PUSH string "tim"; # string : @parameter : list string : @storage : @parameter
+    GET;        # option string : list string : @storage : @parameter
+    IF_NONE
+      {
+        PUSH int 18; # int : list string : @storage : @parameter
+        FAILWITH;   # FAILED
+      }
+      {}; # @some : list string : @storage : @parameter
+    CONS;       # list string : @storage : @parameter
+    UPDATE 6;   # @storage : @parameter
+    # self.data.category.push(params['category']) # @storage : @parameter
+    DUP;        # @storage : @storage : @parameter
+    DUG 2;      # @storage : @parameter : @storage
+    UNPAIR;     # pair (list %category string) (list %content string) : pair (list %dat string) (pair (list %heading string) (list %tim string)) : @parameter : @storage
+    CDR;        # list string : pair (list %dat string) (pair (list %heading string) (list %tim string)) : @parameter : @storage
+    DIG 3;      # @storage : list string : pair (list %dat string) (pair (list %heading string) (list %tim string)) : @parameter
+    CAR;        # pair (list %category string) (list %content string) : list string : pair (list %dat string) (pair (list %heading string) (list %tim string)) : @parameter
+    CAR;        # list string : list string : pair (list %dat string) (pair (list %heading string) (list %tim string)) : @parameter
+    DUP 4;      # @parameter : list string : list string : pair (list %dat string) (pair (list %heading string) (list %tim string)) : @parameter
+    PUSH string "category"; # string : @parameter : list string : list string : pair (list %dat string) (pair (list %heading string) (list %tim string)) : @parameter
+    GET;        # option string : list string : list string : pair (list %dat string) (pair (list %heading string) (list %tim string)) : @parameter
+    IF_NONE
+      {
+        PUSH int 19; # int : list string : list string : pair (list %dat string) (pair (list %heading string) (list %tim string)) : @parameter
+        FAILWITH;   # FAILED
+      }
+      {}; # @some : list string : list string : pair (list %dat string) (pair (list %heading string) (list %tim string)) : @parameter
+    CONS;       # list string : list string : pair (list %dat string) (pair (list %heading string) (list %tim string)) : @parameter
+    PAIR;       # pair (list string) (list string) : pair (list %dat string) (pair (list %heading string) (list %tim string)) : @parameter
+    PAIR;       # pair (pair (list string) (list string)) (pair (list %dat string) (pair (list %heading string) (list %tim string))) : @parameter
+    # self.data.content.push(params['content']) # pair (pair (list string) (list string)) (pair (list %dat string) (pair (list %heading string) (list %tim string))) : @parameter
+    DUP;        # pair (pair (list string) (list string)) (pair (list %dat string) (pair (list %heading string) (list %tim string))) : pair (pair (list string) (list string)) (pair (list %dat string) (pair (list %heading string) (list %tim string))) : @parameter
+    DUG 2;      # pair (pair (list string) (list string)) (pair (list %dat string) (pair (list %heading string) (list %tim string))) : @parameter : pair (pair (list string) (list string)) (pair (list %dat string) (pair (list %heading string) (list %tim string)))
+    UNPAIR;     # pair (list string) (list string) : pair (list %dat string) (pair (list %heading string) (list %tim string)) : @parameter : pair (pair (list string) (list string)) (pair (list %dat string) (pair (list %heading string) (list %tim string)))
+    CAR;        # list string : pair (list %dat string) (pair (list %heading string) (list %tim string)) : @parameter : pair (pair (list string) (list string)) (pair (list %dat string) (pair (list %heading string) (list %tim string)))
+    DIG 3;      # pair (pair (list string) (list string)) (pair (list %dat string) (pair (list %heading string) (list %tim string))) : list string : pair (list %dat string) (pair (list %heading string) (list %tim string)) : @parameter
+    CAR;        # pair (list string) (list string) : list string : pair (list %dat string) (pair (list %heading string) (list %tim string)) : @parameter
+    CDR;        # list string : list string : pair (list %dat string) (pair (list %heading string) (list %tim string)) : @parameter
+    DIG 3;      # @parameter : list string : list string : pair (list %dat string) (pair (list %heading string) (list %tim string))
+    PUSH string "content"; # string : @parameter : list string : list string : pair (list %dat string) (pair (list %heading string) (list %tim string))
+    GET;        # option string : list string : list string : pair (list %dat string) (pair (list %heading string) (list %tim string))
+    IF_NONE
+      {
+        PUSH int 20; # int : list string : list string : pair (list %dat string) (pair (list %heading string) (list %tim string))
+        FAILWITH;   # FAILED
+      }
+      {}; # @some : list string : list string : pair (list %dat string) (pair (list %heading string) (list %tim string))
+    CONS;       # list string : list string : pair (list %dat string) (pair (list %heading string) (list %tim string))
+    SWAP;       # list string : list string : pair (list %dat string) (pair (list %heading string) (list %tim string))
+    PAIR;       # pair (list string) (list string) : pair (list %dat string) (pair (list %heading string) (list %tim string))
+    PAIR;       # pair (pair (list string) (list string)) (pair (list %dat string) (pair (list %heading string) (list %tim string)))
+    NIL operation; # list operation : pair (pair (list string) (list string)) (pair (list %dat string) (pair (list %heading string) (list %tim string)))
+    PAIR;       # pair (list operation) (pair (pair (list string) (list string)) (pair (list %dat string) (pair (list %heading string) (list %tim string))))
+  };
