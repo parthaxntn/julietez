@@ -1,0 +1,4 @@
+# julietez
+a blog website built on tezos blockchain
+KT1VezxFe2Bc8szfGJFPwpdZC8vCPjd8kfPv
+edskS5SBWyFEW3ts7P6aXMoQTj8YAJiWGixKBnak2jhGDFEG7QJk96fHEQFyZjngKi9nEuhho53kBP3DKi8SqM6o6YUojg1FTw
