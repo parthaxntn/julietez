@@ -3,8 +3,8 @@ extends layout.pug
 block main 
     .blog_div 
         .main_blog 
-            img(src="/img/blog0.jpg", alt="")#blogpage_img
-            //- img(src="/img/blog"+ page + ".jpg", alt="")#blogpage_img
+            //- img(src="/img/blog0.jpg", alt="")#blogpage_img
+            img(src="/img/blog"+ num + ".jpg", alt="")#blogpage_img
             .blog_text 
                 h1#blog_heading 
                     | #{heading[num]}

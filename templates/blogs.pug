@@ -2,12 +2,12 @@ extends layout.pug
 
 block main
     .blogs 
-        - for (let i=0; i < length; i++){   
+        - for (let i=0; i <= 2; i++){   
             .blog
                 - var page = i 
                 a(href="/page/" + page ) 
-                    img(src="/img/blog0.jpg", alt="").blog_img
-                    //- img(src="/img/blog"+ page + ".jpg", alt="").blog_img
+                    //- img(src="/img/blog0.jpg", alt="").blog_img
+                    img(src="/img/blog"+ page + ".jpg", alt="").blog_img
                     .texts 
                         div 
                             button.category 
