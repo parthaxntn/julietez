@@ -1,0 +1,23 @@
+extends layout.pug 
+
+block main
+    .blogs 
+        - for (let i=0; i < length; i++){   
+            .blog
+                - var page = i 
+                a(href="/page/" + page ) 
+                    img(src="/img/blog0.jpg", alt="").blog_img
+                    //- img(src="/img/blog"+ page + ".jpg", alt="").blog_img
+                    .texts 
+                        div 
+                            button.category 
+                                |#{category[i]}
+                        h2.blog_heading 
+                            |#{heading[i]}
+                        p.content 
+                            |#{dat[i]} - #{content[i].slice(0,150)}
+                            span#read_more 
+                                |...read more
+        -}
+
+        

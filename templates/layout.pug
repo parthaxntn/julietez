@@ -1,0 +1,43 @@
+html 
+    head 
+        title
+            block title
+        //- link(rel="stylesheet", href="../style.css")
+        //- <link rel ="stylesheet" href="../static/style.css">
+        style 
+            include ../static/style.css
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Water+Brush&display=swap" rel="stylesheet">
+
+    body 
+        header 
+            //- header here
+            .logo 
+                img(src="../static/img/logo", alt="alt")
+            .nav 
+                ul.list_container
+                    li
+                        a(href="/") 
+                            |Home
+                    li 
+                        ||
+                        
+                    li
+                        a(href="/blogs")
+                            |Blogs
+                    li 
+                        ||
+                    li
+                        a(href="/#about")
+                            |About Me 
+        block main
+
+        footer
+            .container
+                p
+                | &copy; 2016 | &nbsp;
+                a(href='#') Absom  

@@ -47,33 +47,6 @@ const getStorage = async () => {
     return storage
 }
 
-const transfer = async () => {
-    const amount = 2;
-    const address = 'tz1g43KFspS2tz39AGFWm2etRUEH1AWdZ4UG';
-    
-    console.log(`Transfering ${amount} ꜩ to ${address}...`);
-    Tezos.contract
-    .transfer({ to: address, amount: amount })
-    .then((op) => {
-    console.log(`Waiting for ${op.hash} to be confirmed...`);
-    return op.confirmation(1).then(() => op.hash);
-})
-.then((hash) => console.log(`Operation injected: https://ithaca.tzstats.com/${hash}`))
-.catch((error) => console.log(`Error: ${error} ${JSON.stringify(error, null, 2)}`));
-
-}
-
-const add = async (params: object) => {
-    
-    const contract = await Tezos.contract.at(contractAddress);
-    console.log(contract.methods);
-    const opHash = await contract.methods.add_blog(params).send();
-    console.log(`waiting for ${opHash.hash} to be confirmed...`);
-    const confirmation = await opHash.confirmation(1);
-    console.log(`Operation injected: https://ithaca.tzstats.com/${opHash}`);
-    
-}
-
 const main = async () => {
     
     // const storage = add({

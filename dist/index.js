@@ -38,45 +38,70 @@ const FAUCET = {
     "activation_code": "1c6671c3b039177f6f488e21dcb56e1a47271125"
 };
 (0, signer_1.importKey)(Tezos, FAUCET.email, FAUCET.password, FAUCET.mnemonic.join(' '), FAUCET.activation_code).catch((e) => console.error(e));
+
+
 const getStorage = () => __awaiter(void 0, void 0, void 0, function* () {
     const contract = yield Tezos.contract.at(contractAddress);
     const storage = yield contract.storage();
-    console.log(storage);
+    // console.log(storage);
     return storage;
 });
-const transfer = () => __awaiter(void 0, void 0, void 0, function* () {
-    const amount = 2;
-    const address = 'tz1g43KFspS2tz39AGFWm2etRUEH1AWdZ4UG';
-    console.log(`Transfering ${amount} ꜩ to ${address}...`);
-    Tezos.contract
-        .transfer({ to: address, amount: amount })
-        .then((op) => {
-        console.log(`Waiting for ${op.hash} to be confirmed...`);
-        return op.confirmation(1).then(() => op.hash);
-    })
-        .then((hash) => console.log(`Operation injected: https://ithaca.tzstats.com/${hash}`))
-        .catch((error) => console.log(`Error: ${error} ${JSON.stringify(error, null, 2)}`));
+
+
+function rendering(params){
+    const express = require('express');
+  
+    // Initialize App
+    const app = express();
+    // app.use('./static', express.static('static'));
+    app.use(express.static('static'))
+
+
+    // var test = {heading: '12'}
+    // console.log(params);
+    
+    // Assign route
+    app.get('/', (req, res, next) => {
+    //   res.render('../templates/index.pug', { name: params, age: 21 });
+    res.render('../templates/index.pug');
+    });
+
+    app.get('/blogs', (req, res, next) => {
+    //   res.render('../templates/index.pug', { name: params, age: 21 });
+    params['length'] = params.heading.length
+    res.render('../templates/blogs.pug', params);
+    });
+  
+    app.get('/test', (req, res, next) => {
+    //   res.render('../templates/index.pug', { name: params, age: 21 });
+    params['length'] = params.heading.length
+    res.render('../templates/index.html', params);
+    });
+    
+    app.get('/page/:n', (req, res, next) => {
+        var page_no = req.params.n;
+        // console.log(page_no);
+    //   res.render('../templates/index.pug', { name: params, age: 21 });
+    params['num'] = page_no
+    res.render('../templates/page.pug', params);
+    });
+    
+    // Start server
+    app.listen(5000, () => {
+    console.log('App listening on port 5000');
 });
-const add = (params) => __awaiter(void 0, void 0, void 0, function* () {
-    const contract = yield Tezos.contract.at(contractAddress);
-    console.log(contract.methods);
-    const opHash = yield contract.methods.add_blog(params).send();
-    console.log(`waiting for ${opHash.hash} to be confirmed...`);
-    const confirmation = yield opHash.confirmation(1);
-    console.log(`Operation injected: https://ithaca.tzstats.com/${opHash}`);
-});
-const main = () => __awaiter(void 0, void 0, void 0, function* () {
-    // const storage = add({
-    //     'heading':'h1',
-    //     'dat':'date1',
-    //     'tim':'tim1',
-    //     'category':'cat1',
-    //     'content':'con1'
-    // });
-    // console.log();
-    const storage = getStorage();
-    console.log(storage);
-});
+
+}
+
+
+
+async function main(){
+    const storage = await getStorage();
+    rendering(storage)
+    // console.log(storage);
+}
+
+
 try {
     main();
 }
